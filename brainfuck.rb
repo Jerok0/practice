@@ -1,15 +1,25 @@
-#A brainfuck attempt with ruby
-#todo < > + - . , [ ]
+##
+#A simple brainfuck parser written in ruby
+#This is my first attempt at a real program in ruby not to mention my first brainfuck parser
+#Usage:
+#use Brainfuck.new to inilitalize
+#use Brainfuck#newprogram to create a new program
+# => It expects 2 arguments the code and an input stream both in String format
+########################################################################################3
 class Brainfuck
 
-	def initialize(code, input)
+	def initialize()
+		@ram = Array.new()
+	end
+
+	def newprogram(code, input)
 		@code = code
 		@input = input
-		@ram = Array.new()
 		@cp = 0
 		@ip = 0
 		@rm = 0
 		@out = ""
+		@ram = Array.new()
 	end
 
 	def getmatch (tofind, original)
@@ -34,17 +44,13 @@ class Brainfuck
 		while at = @code[@cp]
 			case at
 			when '>'
-				@rm += 1
+				move(1)
 			when '<'
-				@rm -= 1
+				move(-1)
 			when '+'
-				@ram[@rm] = 0 unless @ram[@rm]
-				@ram[@rm] += 1
-				@ram[@rm] = 0 if @ram[@rm] > 255
+				increment
 			when '-'
-				@ram[@rm] = 0 unless @ram[@rm]
-				@ram[@rm] -= 1
-				@ram[@rm] = 255 if @ram[@rm] < 0
+				decrement
 			when '.'
 				@out += @ram[@rm].chr
 			when ','
@@ -61,9 +67,19 @@ class Brainfuck
 		@out
 	end
 
+	def move direction
+		@rm += direction
+	end
+
+	def increment
+		@ram[@rm] = 0 if @ram[@rm].nil?
+		@ram[@rm] += 1
+		@ram[@rm] = 0 if @ram[@rm] > 255
+	end
+
+	def decrement
+		@ram[@rm] = 0 if @ram[@rm].nil?
+		@ram[@rm] -= 1
+		@ram[@rm] = 255 if @ram[@rm] < 0
+	end
 end
-
-
-alsa = Brainfuck.new(",.-----.+++++++++++++++++++.-.++.------------------.++++++++.--------.++++++++++++.------------.++++++++.", "f")
-puts alsa.parse
-
