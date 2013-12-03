@@ -11,7 +11,7 @@ class Brainfuck
 		@rm = 0
 		@out = ""
 	end
-	
+
 	def getmatch (tofind, original)
 		move = tofind == ']' ? 1 : -1
 		nest = 0
@@ -23,6 +23,7 @@ class Brainfuck
 				nest -= 1
 			end
 			if nest == -1
+				return
 			end
 		end
 	end
@@ -49,7 +50,7 @@ class Brainfuck
 				@ip += 1
 			when '['
 				getmatch(']', '[') if @ram[@rm] == 0
-				
+
 			when ']'
 				getmatch('[', ']') if @ram[@rm]!= 0
 			end
