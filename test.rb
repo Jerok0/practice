@@ -16,4 +16,9 @@ class Mytest < Test::Unit::TestCase
     obj1.price = 99.78
     assert_equal(obj1.price_in_cents, 9978)
   end
+
+  def test2
+
+
+  end
 end

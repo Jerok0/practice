@@ -1,3 +1,4 @@
+
 class BookInStock
   attr_accessor :isbn, :price
   def initialize(isbn, price)
@@ -18,11 +19,3 @@ class BookInStock
     @price = cents/100
   end
 end
-
-mosi = BookInStock.new("1234567891", "19.88799")
-puts mosi.price
-mosi.setprice = 9899
-puts mosi.disprice
-
-
-#class csvreader
