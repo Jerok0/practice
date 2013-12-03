@@ -1,7 +1,7 @@
 #A brainfuck attempt with ruby
 #todo < > + - . , [ ]
 class Brainfuck
-	#private getmatch
+
 	def initialize(code, input)
 		@code = code
 		@input = input
@@ -27,7 +27,9 @@ class Brainfuck
 			end
 		end
 	end
+
 	private :getmatch
+
 	def parse
 		while at = @code[@cp]
 			case at
@@ -58,9 +60,10 @@ class Brainfuck
 		end
 		@out
 	end
+
 end
 
 
-alsa = Brainfuck.new(",.+++++++++++++++.------------------.++++++++.", "f")
+alsa = Brainfuck.new(",.-----.+++++++++++++++++++.-.++.------------------.++++++++.--------.++++++++++++.------------.++++++++.", "f")
 puts alsa.parse
 
